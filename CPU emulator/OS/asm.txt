@@ -1,0 +1,18 @@
+#load memory data
+set 3
+stk 1
+stk 0
+#compare values
+cmp D
+set 0
+#increment reg0 (2nd stack var)
+set 2
+add 1
+set 2
+#place data back in stack and loop
+set 3
+stk 0
+stk 1
+jnz 2
+qut
+END

@@ -1,0 +1,45 @@
+0: NULL: -
+1: ADD: if (!flag[2]) reg0 + reg1 -> reg[O] ? reg0 += O
+2: MIN: if (!flag[3]) reg0 - reg1 -> reg[O] ? reg0 -= O
+3: AND: reg0 & reg1 -> reg[O]
+4: NOR: ~(reg0 | reg1) -> reg[O]
+5: CMP: reg0 == reg1 -> reg[O]
+6: OVR: reg0 > reg1 -> reg[O]
+7: MWF: reg0 <- reg[O]
+8: MWT: reg0 -> reg[O]
+9: SET: flag[O % 8] = !flag[O % 8]
+A: STW: [regF/0] <- reg[O]
+B: LDW: [regF/0] -> reg[O]
+C: STK: if (!flag[4]) PUSH <- reg[O] ? POP -> reg[O]
+D: JNZ: if (flag) (pc = [regF/O])
+E: IOB: if (flag) (devices[regB] -> reg[O]) ? reg[O] -> devices[regB]
+F: QUT: HALT SYS
+
+INSTRUCTION:
+XXXXYYYY
+X: Opcode
+Y: Operand
+
+Registers:
+0: Auto ins. input 1 (agi1)
+1: Auto ins. input 2 (agi2)
+2...9: General Store (gen1..gen8)
+A: I/O device selector (iods)
+B: SS (stack sector) (stks)
+C: SP (stack pointer) (stkp)
+D: flags (flgs)
+E: Program memory sector (prms)
+F: Memory sector (mems)
+
+FLAGS (regD):
+XXXXDCBA
+A - JNZ
+B - I/O in (1) out (0)
+C - ADD/MIN uses operand (1) or reg1 (0)
+D - (1) POP, (0) PUSH (FOR STK INSTRUCTION)
+X - NULL
+
+MEMORY:
+0x0000...0x02FF = PROGRAM MEMORY & MACROS
+0x0300...0x04FF = STACK MEMORY
+0x0500...0xFFFF = ???

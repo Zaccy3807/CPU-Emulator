@@ -1,0 +1,4 @@
+OS design:
+
+starting commands:
+    QUIT - Exits system (HALT)

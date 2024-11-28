@@ -1,0 +1,7 @@
+set 2
+mwf 2
+add 1
+mwt B
+stk 0
+qut
+END
